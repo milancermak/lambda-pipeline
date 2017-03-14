@@ -1,0 +1,12 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - pip install -r requirements.txt -t app
+
+artifacts:
+  base-directory: app
+  files:
+    - '**/*'
+  type: zip

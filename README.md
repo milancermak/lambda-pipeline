@@ -8,7 +8,7 @@ I [built it](https://milancermak.wordpress.com/2017/03/15/aws-lambda-deployment-
 
 ### How it works :wrench:
 
-Besides a couple of necessary resources, like IAM roles, the core of the system is a combo of CodeCommit (code repository), CodeBuild (building, testing and packaging) and CodePipeline (deployment). It is the CodePipeline that ties it all together, where the magic happens. 
+Besides a couple of necessary resources, like IAM roles, the core of the system is a combo of CodeCommit (code repository), CodeBuild (building, testing and packaging) and CodePipeline (deployment). It is the CodePipeline that ties it all together, where the magic happens.
 
 The pipeline is defined in a couple of stages.
 
@@ -67,3 +67,6 @@ Also note that my setup is configured for python, but you can easily change it t
 
 You'll probably want to change some other values in the CFN templates as well, just so your Lambda function is not named `my-lambda-function` but something more appropriate for your project :grin:
 
+##### What to change:
+ * `PIPELINE_STACK_NAME` parameter in bootstrap.sh - I recommend keeping the same base as `ProjectName` and adding a `-pipeline` suffix
+ * Parameters in both CFN templates

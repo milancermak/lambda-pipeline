@@ -4,7 +4,10 @@ Description: CD pipeline for my Lambda project
 Parameters:
   ProjectName:
     Type: String
-    Default: lambda-pipeline
+    Default: my-lambda-project
+  CapitalizedProjectName:
+    Type: String
+    Default: MyLambdaProject
   SourceRepositoryName:
     Type: String
     Default: lambda-pipeline
@@ -179,7 +182,7 @@ Resources:
                 ActionMode: CREATE_UPDATE
                 Capabilities: CAPABILITY_IAM
                 RoleArn: !GetAtt CloudFormationRole.Arn
-                StackName: !Sub '${AWS::StackName}-app'
+                StackName: !Sub '${ProjectName}-app'
                 TemplatePath: SourceOutput::infrastructure/lambda.yml
                 ParameterOverrides: '{"DeploymentPackageKey": {"Fn::GetArtifactAtt": ["BuildOutput", "ObjectKey"]}}'
               InputArtifacts:
@@ -192,7 +195,7 @@ Outputs:
     Description: S3 bucket holding all the OutputArtifacts of any pipeline stage
     Value: !Ref ArtifactsBucket
     Export:
-      Name: PipelineArtifactsBucket
+      Name: !Sub '${CapitalizedProjectName}PipelineArtifactsBucket'
 
   RepositoryURL:
     Description: SSH URL of the repository
